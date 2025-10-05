@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 TaskTrackr Frontend
 
-## Getting Started
+Frontend for **TaskTrackr**, a full-stack productivity app built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**.  
+This interface provides user authentication, project management, and task tracking integrated with a Django REST API backend.
 
-First, run the development server:
+---
 
-```bash
+## 🚀 Tech Stack
+
+- **Next.js 15 (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion**
+- **React Hot Toast**
+- **Axios**
+- **Jest + React Testing Library**
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Install dependencies
+```
+cd frontend
+npm install
+```
+# 2️⃣ Create environment file
+Create a .env.local file in /frontend:
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
+# 3️⃣ Run the app
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+The app will be available at http://localhost:3000
+
+# 🧩 Project Structure
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── login/
+│   │   ├── register/
+│   │   ├── dashboard/
+│   │   └── page.tsx
+│   ├── context/
+│   ├── components/
+│   └── __tests__/
+│
+├── jest.config.js
+├── jest.setup.js
+└── tsconfig.json
+```
+# 🧠 Available Pages
+```
+| Page          | Path         | Description               |
+| ------------- | ------------ | ------------------------- |
+| **Login**     | `/login`     | User authentication (JWT) |
+| **Register**  | `/register`  | Create account            |
+| **Dashboard** | `/dashboard` | Manage projects and tasks |
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🧪 Testing
+Run all frontend tests using Jest and React Testing Library:
+```
+npm test
+```
+# ✅ Current coverage:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Login → successful login & token storage
+- Register → successful registration
+- Dashboard → fetching & displaying projects
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌈 UI Highlights
+- Animated transitions via Framer Motion
+- Responsive design (mobile-first)
+- Toast notifications for user feedback
+- Modal-based project/task creation
 
-## Learn More
+# 🧱 Deployment
+This app can be deployed on Vercel easily:
+- Push this repo to GitHub
+- Connect it to Vercel
+- Set the environment variable NEXT_PUBLIC_API_URL to your backend’s live API URL
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧩 Author
+Developed by Özkan Çimenli
+📧 cimenliozkan1@gmail.com

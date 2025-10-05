@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* ===== BASE COLORS ===== */
+:root {
+  --bg: #f8fafc; /* açık gri ton */
+  --fg: #111827;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+  --primary-hover: #1e40af;
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0a0a;
+    --fg: #f3f4f6;
+    --card: #18181b;
+    --border: #27272a;
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+  }
+}
+
+/* ===== GLOBAL ===== */
+html, body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ===== INPUTS ===== */
+input,
+textarea {
+  width: 100%;
+  background-color: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ===== BUTTONS ===== */
+button {
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: var(--radius);
+  transition: all 0.15s ease;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+.btn-secondary:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 40;
+}
+
+.modal-box {
+  background-color: var(--card);
+  color: var(--fg);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== UTILITIES ===== */
+.text-muted {
+  color: #6b7280;
+}
+
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+/* === Dashboard theme harmony === */
+
+.modal-bg {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #111827;
+}
+
+/* Input fields — same tone as dashboard cards */
+input,
+textarea {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  transition: all 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: rgba(229, 231, 235, 0.7);
+  color: #374151;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(209, 213, 219, 0.9);
+}
+
+/* === Frosted Dashboard Background === */
+html, body {
+  background: linear-gradient(to bottom right, #f9fbff, #eef1ff);
+  color: var(--fg);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Dark mode uyumu */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: linear-gradient(to bottom right, #0a0a0a, #111827);
+    color: #f3f4f6;
+  }
+}
+
+
+select {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  appearance: none;
+  transition: all 0.2s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+option {
+  color: #111827;
+  background-color: white;
+}
