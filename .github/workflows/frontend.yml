@@ -23,11 +23,9 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        working-directory: ./frontend
         run: npm ci
 
       - name: Run tests
-        working-directory: ./frontend
         run: npm test
 
       - name: Deploy to Vercel
@@ -37,4 +35,3 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./frontend
