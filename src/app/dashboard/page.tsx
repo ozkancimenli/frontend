@@ -19,7 +19,8 @@ interface Project {
   tasks?: Task[];
 }
 
-export default function DashboardPage() {
+const DashboardPage = () => {
+
   const router = useRouter();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -365,3 +366,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+export default DashboardPage;
