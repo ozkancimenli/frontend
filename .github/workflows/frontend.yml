@@ -1,0 +1,47 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Run Tests and Deploy
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      # 🧰 1. Kod deposunu al
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # ⚙️ 2. Node.js ortamını ayarla
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 📦 3. Bağımlılıkları yükle
+      - name: Install dependencies
+        run: npm ci
+
+      # 🧪 4. Testleri çalıştır
+      - name: Run tests
+        run: npm test
+
+      # 🚀 5. Deploy to Vercel (sadece main branch için)
+      - name: Deploy to Vercel
+        if: github.ref == 'refs/heads/main'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./frontend
