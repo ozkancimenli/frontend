@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 
+type TaskStatus = "pending" | "in_progress" | "done";
+
 interface Task {
   id: number;
   title: string;
-  status: "pending" | "in_progress" | "done";
+  status: TaskStatus;
   project: number;
 }
 
@@ -19,15 +21,32 @@ interface Project {
   tasks?: Task[];
 }
 
-const DashboardPage = () => {
+interface CreateProjectPayload {
+  name: string;
+  description: string;
+}
 
+interface CreateTaskPayload {
+  title: string;
+  status: TaskStatus;
+}
+
+const statusOrder: TaskStatus[] = ["pending", "in_progress", "done"];
+
+const DashboardPage: React.FC = () => {
   const router = useRouter();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState<number | null>(null);
-  const [newProject, setNewProject] = useState({ name: "", description: "" });
-  const [newTask, setNewTask] = useState({ title: "", status: "pending" });
+  const [newProject, setNewProject] = useState<CreateProjectPayload>({
+    name: "",
+    description: "",
+  });
+  const [newTask, setNewTask] = useState<CreateTaskPayload>({
+    title: "",
+    status: "pending",
+  });
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("access") : null;
@@ -58,7 +77,7 @@ const DashboardPage = () => {
   }, [router, token]);
 
   // 🟦 Yeni proje oluştur
-  const handleCreateProject = async (e: React.FormEvent) => {
+  const handleCreateProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newProject.name) return toast.error("Project name is required");
 
@@ -78,7 +97,10 @@ const DashboardPage = () => {
   };
 
   // 🟢 Yeni task ekle
-  const handleAddTask = async (projectId: number, e: React.FormEvent) => {
+  const handleAddTask = async (
+    projectId: number,
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     if (!newTask.title) return toast.error("Task title is required");
 
@@ -105,8 +127,6 @@ const DashboardPage = () => {
 
 // 🟣 Toggle task status
   const toggleTaskStatus = (projectId: number, taskId: number) => {
-    const order: Task["status"][] = ["pending", "in_progress", "done"];
-
     setProjects((prev) =>
       prev.map((p) => {
         if (p.id !== projectId) return p;
@@ -115,7 +135,8 @@ const DashboardPage = () => {
         const updatedTasks = p.tasks
           ?.map((t) => {
             if (t.id !== taskId) return t;
-            const next = order[(order.indexOf(t.status) + 1) % order.length];
+            const next =
+              statusOrder[(statusOrder.indexOf(t.status) + 1) % statusOrder.length];
             return { ...t, status: next };
           })
           // 🧠 "done" olanları en sona taşı
@@ -134,7 +155,7 @@ const DashboardPage = () => {
     const task = project?.tasks?.find((t) => t.id === taskId);
     if (!task) return;
     const next =
-      order[(order.indexOf(task.status) + 1) % order.length];
+      statusOrder[(statusOrder.indexOf(task.status) + 1) % statusOrder.length];
 
     axios
       .patch(
